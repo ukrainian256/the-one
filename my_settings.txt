@@ -1,0 +1,25 @@
+Scenario.name = UniScenario1
+Scenario.endTime = 86400
+Scenario.updateInterval = 0.1
+Scenario.simulateConnections = false
+MovementModel.worldSize = 1000,1000
+Report.nrOfReports = 1
+Report.report1 = NodeDensityReport
+Report.reportDir = reports
+Events.nrof = 0
+
+Scenario.nrofHostGroups = 1
+Group1.groupID = x
+Group1.nrofHosts = 500
+Group1.interface1 = myInterface
+myInterface.type = SimpleBroadcastInterface
+myInterface.transmitRange = 0
+myInterface.transmitSpeed = 0
+Group1.movementModel = UniversityMovement
+Group1.router = PassiveRouter
+
+NodeDensityReport.sampleInterval = 10
+NodeDensityReport.outputGnuplot = true
+NodeDensityReport.xCount = 50
+NodeDensityReport.yCount = 50
+NodeDensityReport.onlyAverage = true
