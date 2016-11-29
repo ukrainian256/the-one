@@ -55,11 +55,11 @@ public class Student {
         currentTime += currentClass.getEndTime();
         currentClassIndex++;
 
-        return resultingEvents;
-
         // 5. class finished - check for next class, if no -> go home, else -> 5.
         // 6. based on quantity of time generate shortBreakActivities or longBreakActivities -> shortActivity || longActivity
         // 7. move to point 4
+
+        return resultingEvents;
 
     }
 

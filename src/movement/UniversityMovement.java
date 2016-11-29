@@ -31,7 +31,7 @@ public class UniversityMovement extends MovementModel {
     /** names of the previously cached map's files (for hit comparison) */
     private static List<String> cachedMapFiles = null;
     /** map based movement model's settings namespace ({@value})*/
-    public static final String MAP_BASE_MOVEMENT_NS = "MapBasedMovement";
+    public static final String MAP_BASE_MOVEMENT_NS = "UniversityMovement";
     /** number of map files -setting id ({@value})*/
     public static final String NROF_FILES_S = "nrofMapFiles";
     /** map file -setting id ({@value})*/

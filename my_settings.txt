@@ -18,6 +18,9 @@ myInterface.transmitSpeed = 0
 Group1.movementModel = UniversityMovement
 Group1.router = PassiveRouter
 
+UniversityMovement.nrofMapFiles = 1
+UniversityMovement.mapFile1 = data/mi_building.wkt
+
 NodeDensityReport.sampleInterval = 10
 NodeDensityReport.outputGnuplot = true
 NodeDensityReport.xCount = 50
