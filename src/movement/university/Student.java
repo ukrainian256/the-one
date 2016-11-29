@@ -79,7 +79,7 @@ public class Student {
 
         HashMap<shortBreakActivities, Activity> shortBreakActivitiesActivityMapping = new HashMap<>();
 
-        shortBreakActivitiesActivityMapping.put(shortBreakActivities.Smoke, new Activity(300, new Coord(0, 0)));
+        shortBreakActivitiesActivityMapping.put(shortBreakActivities.Smoke, new Activity(300, new Coord(215.93, 155.12)));
 
         return shortBreakActivitiesActivityMapping.get(shortBreakActivities.Smoke);
 
