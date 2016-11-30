@@ -38,28 +38,53 @@ public class Student {
         double currentTime = arrivalTime;
         int currentClassIndex = 0;
 
-        // 3. depending on quantity of time before the activity generate shortBreakActivities -> state shortActivity
-        double firstClassTime = classes.get(0).getStartTime();
-        while(firstClassTime - currentTime > 400) {
+        while(currentClassIndex < classes.size()) {
 
-            ScheduledEvent eventToAdd = generateShortBreakEvent(currentTime);
-            resultingEvents.add(eventToAdd);
+            UniversityClass nextClass = classes.get(currentClassIndex);
 
-            currentTime += eventToAdd.getDuration();
+            // check for possibility to do long break activities
+            while(canDoLongActivity(currentTime, nextClass.getStartTime())) {
+
+                ScheduledEvent eventToPush = generateLongBreakEvent(currentTime);
+                resultingEvents.add(eventToPush);
+                currentTime += eventToPush.getDuration();
+
+            }
+
+            // check for possibility to do short break activities
+            while(canDoShortActivity(currentTime, nextClass.getStartTime())) {
+
+                ScheduledEvent eventToPush = generateShortBreakEvent(currentTime);
+                resultingEvents.add(eventToPush);
+                currentTime += eventToPush.getDuration();
+
+            }
+
+            // go to class
+            UniversityClass currentClass = classes.get(currentClassIndex);
+            resultingEvents.add(generateEventForClass(currentClass));
+
+            // class finished, update index for next class + update currentTime
+            currentTime = currentClass.getEndTime();
+            currentClassIndex++;
 
         }
 
-        // 4. go to next class -> state sittingInTheClass
-        UniversityClass currentClass = classes.get(0);
-        resultingEvents.add(generateEventForClass(currentClass));
-        currentTime += currentClass.getEndTime();
-        currentClassIndex++;
-
-        // 5. class finished - check for next class, if no -> go home, else -> 5.
-        // 6. based on quantity of time generate shortBreakActivities or longBreakActivities -> shortActivity || longActivity
-        // 7. move to point 4
+        // go home - nothing should be added
 
         return resultingEvents;
+
+    }
+
+    private boolean canDoShortActivity(double currentTime, double nextActivityTime) {
+
+        return nextActivityTime - currentTime > 400;
+
+    }
+
+    private boolean canDoLongActivity(double currentTime, double nextActivityTime) {
+
+        return nextActivityTime - currentTime > 2000;
 
     }
 
@@ -75,6 +100,12 @@ public class Student {
 
     }
 
+    private ScheduledEvent generateLongBreakEvent(double startTime) {
+
+        return new ScheduledEvent(this.generateLongBreakActivity(), startTime);
+
+    }
+
     private Activity generateShortBreakActivity() {
 
         HashMap<shortBreakActivities, Activity> shortBreakActivitiesActivityMapping = new HashMap<>();
@@ -82,6 +113,16 @@ public class Student {
         shortBreakActivitiesActivityMapping.put(shortBreakActivities.Smoke, new Activity(300, new Coord(190.06, 379.66)));
 
         return shortBreakActivitiesActivityMapping.get(shortBreakActivities.Smoke);
+
+    }
+
+    private Activity generateLongBreakActivity() {
+
+        HashMap<longBreakActivities, Activity> shortBreakActivitiesActivityMapping = new HashMap<>();
+
+        shortBreakActivitiesActivityMapping.put(longBreakActivities.Library, new Activity(1800, new Coord(251.28, 194.90)));
+
+        return shortBreakActivitiesActivityMapping.get(longBreakActivities.Library);
 
     }
 
