@@ -61,7 +61,7 @@ public class UniversityMovement extends MovementModel {
     @Override
     public Coord getInitialLocation() {
 
-        return new Coord(224.82, 151.65);
+        return new Coord(614.90, 254.13);
 
     }
 
