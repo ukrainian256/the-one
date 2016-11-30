@@ -52,7 +52,7 @@ public class UniversityMovement extends MapBasedMovement {
     @Override
     public Coord getInitialLocation() {
 
-        return new Coord(324.86, -199.45+432.75);
+        return new Coord(592.68, -262.80+432.75);
 
     }
 
