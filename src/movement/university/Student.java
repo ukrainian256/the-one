@@ -110,7 +110,7 @@ public class Student {
 
         HashMap<shortBreakActivities, Activity> shortBreakActivitiesActivityMapping = new HashMap<>();
 
-        shortBreakActivitiesActivityMapping.put(shortBreakActivities.Smoke, new Activity(300, new Coord(190.06, 379.66)));
+        shortBreakActivitiesActivityMapping.put(shortBreakActivities.Smoke, new Activity(300, new Coord(614.90, -254.13+432.75)));
 
         return shortBreakActivitiesActivityMapping.get(shortBreakActivities.Smoke);
 
@@ -120,7 +120,7 @@ public class Student {
 
         HashMap<longBreakActivities, Activity> shortBreakActivitiesActivityMapping = new HashMap<>();
 
-        shortBreakActivitiesActivityMapping.put(longBreakActivities.Library, new Activity(1800, new Coord(251.28, 194.90)));
+        shortBreakActivitiesActivityMapping.put(longBreakActivities.Library, new Activity(1800, new Coord(251.28, -194.90+432.75)));
 
         return shortBreakActivitiesActivityMapping.get(longBreakActivities.Library);
 
