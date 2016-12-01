@@ -33,7 +33,7 @@ public class Student {
 
         // 2. based on organizedLevel and transportationType generate arrivalTime
         // TODO: include organizerLevel and transportationType in generation
-        double arrivalTime = calculateArrivalDate(classes.get(0).getStartTime());
+        double arrivalTime = calculateArrivalDate(this.person.getOrganizedLevel(), classes.get(0).getStartTime());
 
         double currentTime = arrivalTime;
         int currentClassIndex = 0;
@@ -62,7 +62,7 @@ public class Student {
 
             // go to class
             UniversityClass currentClass = classes.get(currentClassIndex);
-            resultingEvents.add(generateEventForClass(currentClass));
+            resultingEvents.add(generateEventForClass(currentClass, currentTime));
 
             // class finished, update index for next class + update currentTime
             currentTime = currentClass.getEndTime();
@@ -88,7 +88,9 @@ public class Student {
 
     }
 
-    private double calculateArrivalDate(double eventStartTime) {
+    private double calculateArrivalDate(double organizedLevel, double eventStartTime) {
+
+//        return eventStartTime - (organizedLevel - 0.5) * 1200 - 100;
 
         return eventStartTime - 600;
 
@@ -126,11 +128,11 @@ public class Student {
 
     }
 
-    private ScheduledEvent generateEventForClass(UniversityClass uniClass) {
+    private ScheduledEvent generateEventForClass(UniversityClass uniClass, double currentTime) {
 
-        Activity activity = new Activity(uniClass.getEndTime() - uniClass.getStartTime(), uniClass.getLocation());
+        Activity activity = new Activity(uniClass.getEndTime() - currentTime, uniClass.getLocation());
 
-        return new ScheduledEvent(activity, uniClass.getStartTime());
+        return new ScheduledEvent(activity, currentTime);
 
     }
 

@@ -15,7 +15,7 @@ import java.util.*;
 /**
  * Created by afedotov on 11/29/16.
  */
-public class UniversityMovement extends MapBasedMovement {
+public class UniversityMovement extends ShortestPathMapBasedMovement {
 
     Student student;
 
@@ -24,17 +24,6 @@ public class UniversityMovement extends MapBasedMovement {
     public UniversityMovement(Settings settings) {
         super(settings);
         student = new Student();
-    }
-
-    /**
-     * Creates a new MapBasedMovement based on a Settings object's settings
-     * but with different SimMap
-     * @param settings The Settings object where the settings are read from
-     * @param newMap The SimMap to use
-     * @param nrofMaps How many map "files" are in the map
-     */
-    public UniversityMovement(Settings settings, SimMap newMap, int nrofMaps) {
-        super(settings, newMap, nrofMaps);
     }
 
     /**
@@ -97,15 +86,17 @@ public class UniversityMovement extends MapBasedMovement {
         }
 
         Path p = new Path(generateSpeed());
+        Coord initialLocation;
+        Coord destinationLocation;
 
         if(currentEventIndex == -1) {
 
-            p.addWaypoint(this.getInitialLocation());
+            initialLocation = this.getInitialLocation();
 
         } else {
 
             ScheduledEvent currentEvent = student.getGeneratedEvents().get(currentEventIndex);
-            p.addWaypoint(currentEvent.getLocation());
+            initialLocation = currentEvent.getLocation();
 
         }
 
@@ -113,13 +104,26 @@ public class UniversityMovement extends MapBasedMovement {
 
         if(currentEventIndex == student.getGeneratedEvents().size()) {
 
-            p.addWaypoint(this.getInitialLocation());
+            destinationLocation = this.getInitialLocation();
 
         } else {
 
             ScheduledEvent nextEvent = student.getGeneratedEvents().get(currentEventIndex);
-            p.addWaypoint(nextEvent.getLocation());
+            destinationLocation = nextEvent.getLocation();
 
+        }
+
+        MapNode from = super.getMap().getNodeByCoord(initialLocation);
+        MapNode to = super.getMap().getNodeByCoord(destinationLocation);
+
+        List<MapNode> nodePath = super.pathFinder.getShortestPath(from, to);
+
+        // this assertion should never fire if the map is checked in read phase
+        assert nodePath.size() > 0 : "No path from " + lastMapNode + " to " +
+                to + ". The simulation map isn't fully connected";
+
+        for (MapNode node : nodePath) { // create a Path from the shortest path
+            p.addWaypoint(node.getLocation());
         }
 
         return p;
