@@ -1,4 +1,5 @@
 package movement.university;
+
 import core.Coord;
 
 import java.util.*;
@@ -11,6 +12,9 @@ public class Student {
     private ClassesGenerator classesGenerator;
     private Person person;
     private List<ScheduledEvent> generatedEvents;
+    private HashMap<shortBreakActivities, Activity> shortBreakActivitiesActivityMapping;
+    private HashMap<longBreakActivities, Activity> longBreakActivitiesActivityHashMap;
+
 
     public List<ScheduledEvent> getGeneratedEvents() {
         return generatedEvents;
@@ -20,6 +24,16 @@ public class Student {
 
         this.person = new Person(new PersonGenerator());
         this.classesGenerator = new ClassesGenerator();
+
+        double magicNumber = 432.75;
+
+        shortBreakActivitiesActivityMapping = new HashMap<>();
+        shortBreakActivitiesActivityMapping.put(shortBreakActivities.Smoke, new Activity(300, new Coord(614.90, -254.13 + magicNumber)));
+
+        longBreakActivitiesActivityHashMap = new HashMap<>();
+        longBreakActivitiesActivityHashMap.put(longBreakActivities.Library, new Activity(1800, new Coord(251.28, -194.90 + magicNumber)));
+        longBreakActivitiesActivityHashMap.put(longBreakActivities.SittingInTheHall, new Activity(1800, new Coord(366.89, -172.76 + magicNumber)));
+
         this.generatedEvents = generateEvents();
 
     }
@@ -38,12 +52,12 @@ public class Student {
         double currentTime = arrivalTime;
         int currentClassIndex = 0;
 
-        while(currentClassIndex < classes.size()) {
+        while (currentClassIndex < classes.size()) {
 
             UniversityClass nextClass = classes.get(currentClassIndex);
 
             // check for possibility to do long break activities
-            while(canDoLongActivity(currentTime, nextClass.getStartTime())) {
+            while (canDoLongActivity(currentTime, nextClass.getStartTime())) {
 
                 ScheduledEvent eventToPush = generateLongBreakEvent(currentTime);
                 resultingEvents.add(eventToPush);
@@ -52,7 +66,7 @@ public class Student {
             }
 
             // check for possibility to do short break activities
-            while(canDoShortActivity(currentTime, nextClass.getStartTime())) {
+            while (canDoShortActivity(currentTime, nextClass.getStartTime())) {
 
                 ScheduledEvent eventToPush = generateShortBreakEvent(currentTime);
                 resultingEvents.add(eventToPush);
@@ -110,21 +124,15 @@ public class Student {
 
     private Activity generateShortBreakActivity() {
 
-        HashMap<shortBreakActivities, Activity> shortBreakActivitiesActivityMapping = new HashMap<>();
-
-        shortBreakActivitiesActivityMapping.put(shortBreakActivities.Smoke, new Activity(300, new Coord(614.90, -254.13+432.75)));
-
         return shortBreakActivitiesActivityMapping.get(shortBreakActivities.Smoke);
 
     }
 
     private Activity generateLongBreakActivity() {
 
-        HashMap<longBreakActivities, Activity> shortBreakActivitiesActivityMapping = new HashMap<>();
-
-        shortBreakActivitiesActivityMapping.put(longBreakActivities.Library, new Activity(1800, new Coord(251.28, -194.90+432.75)));
-
-        return shortBreakActivitiesActivityMapping.get(longBreakActivities.Library);
+        Random r = new Random();
+        longBreakActivities activityValue = longBreakActivities.values()[r.nextInt(2)];
+        return longBreakActivitiesActivityHashMap.get(activityValue);
 
     }
 
@@ -147,5 +155,5 @@ enum shortBreakActivities {
 enum longBreakActivities {
     Library,
     Mensa,
-    MeetFriends
+    SittingInTheHall
 }
