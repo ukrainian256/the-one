@@ -12,8 +12,9 @@ public class Student {
     private ClassesGenerator classesGenerator;
     private Person person;
     private List<ScheduledEvent> generatedEvents;
-    private HashMap<shortBreakActivities, Activity> shortBreakActivitiesActivityMapping;
     private HashMap<longBreakActivities, Activity> longBreakActivitiesActivityHashMap;
+    private Random RANDOM = new Random();
+    private Class longBreakActivitiesClass = longBreakActivities.class;
 
 
     public List<ScheduledEvent> getGeneratedEvents() {
@@ -26,9 +27,6 @@ public class Student {
         this.classesGenerator = new ClassesGenerator();
 
         double magicNumber = 432.75;
-
-        shortBreakActivitiesActivityMapping = new HashMap<>();
-        shortBreakActivitiesActivityMapping.put(shortBreakActivities.Smoke, new Activity(300, new Coord(614.90, -254.13 + magicNumber)));
 
         longBreakActivitiesActivityHashMap = new HashMap<>();
         longBreakActivitiesActivityHashMap.put(longBreakActivities.Library, new Activity(1800, new Coord(251.28, -194.90 + magicNumber)));
@@ -44,7 +42,6 @@ public class Student {
 
         // 1. generate classes, sorted by time
         List<UniversityClass> classes = classesGenerator.generateClasses();
-
         // 2. based on organizedLevel and transportationType generate arrivalTime
         // TODO: include organizerLevel and transportationType in generation
         double arrivalTime = calculateArrivalDate(this.person.getOrganizedLevel(), classes.get(0).getStartTime());
@@ -124,15 +121,14 @@ public class Student {
 
     private Activity generateShortBreakActivity() {
 
-        return shortBreakActivitiesActivityMapping.get(shortBreakActivities.Smoke);
+        return new Activity(300, ActivityLocator.getShortActivityLocation(shortBreakActivities.Smoke));
 
     }
 
     private Activity generateLongBreakActivity() {
 
-        Random r = new Random();
-        longBreakActivities activityValue = longBreakActivities.values()[r.nextInt(2)];
-        return longBreakActivitiesActivityHashMap.get(activityValue);
+        longBreakActivities activityValue = (longBreakActivities) (longBreakActivitiesClass.getEnumConstants()[RANDOM.nextInt(longBreakActivitiesClass.getEnumConstants().length)]);
+        return new Activity(1800, ActivityLocator.getLongActivityLocation(activityValue));
 
     }
 
@@ -144,16 +140,4 @@ public class Student {
 
     }
 
-}
-
-enum shortBreakActivities {
-    Smoke,
-    Coffee,
-    Toilet
-}
-
-enum longBreakActivities {
-    Library,
-    Mensa,
-    SittingInTheHall
 }

@@ -31,5 +31,4 @@ public class ScheduledEvent {
         return activity.getDuration();
     }
 
-
 }
