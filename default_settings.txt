@@ -5,9 +5,9 @@
 ## Scenario settings
 Scenario.name = default_scenario
 Scenario.simulateConnections = true
-Scenario.updateInterval = 0.1
+Scenario.updateInterval = 10
 # 43200s == 12h
-Scenario.endTime = 86400
+Scenario.endTime = 45000
 
 ## Interface-specific settings:
 # type : which interface class the interface belongs to
@@ -62,7 +62,7 @@ Group.speed = 0.5, 1.5
 # Message TTL of 300 minutes (5 hours)
 Group.msgTtl = 300
 
-Group.nrofHosts = 100
+Group.nrofHosts = 800
 
 # group1 (pedestrians) specific settings
 Group1.groupID = p

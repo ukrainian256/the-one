@@ -1,6 +1,6 @@
 Scenario.name = UniScenario1
-Scenario.endTime = 86400
-Scenario.updateInterval = 0.1
+Scenario.endTime = 45000
+Scenario.updateInterval = 10
 Scenario.simulateConnections = false
 MovementModel.worldSize = 1000,1000
 Report.nrOfReports = 1

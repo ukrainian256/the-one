@@ -1,6 +1,7 @@
 package movement.university;
 
 import core.Coord;
+import movement.UniversityMovement;
 
 /**
  * Created by afedotov on 11/28/16.
@@ -40,5 +41,11 @@ public class UniversityClass {
     }
 
     public double getPopularity() { return this.popularity; }
+
+    public static UniversityClass replicateWithDifferentLocation(UniversityClass other, Coord location) {
+
+        return new UniversityClass(other.getName(), other.getStartTime(), other.getEndTime(), location, other.getPopularity());
+
+    }
 
 }

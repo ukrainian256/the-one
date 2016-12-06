@@ -30,6 +30,19 @@ public class ActivityLocator {
                 new Coord(617.88, -211.52 + magicNumber)
         )));
 
+        shortBreakActivitiesLocations.put(shortBreakActivities.SitInTheHall, new ArrayList<>(Arrays.asList(
+                new Coord(366.89, -172.76 + magicNumber),
+                new Coord(390.65, -169.99 + magicNumber),
+                new Coord(454.79, -159.36 + magicNumber),
+                new Coord(454.79, -159.36 + magicNumber),
+                new Coord(506.02, -190.24 + magicNumber),
+                new Coord(379.76, -210.79 + magicNumber),
+                new Coord(402.21, -209.86 + magicNumber),
+                new Coord(464.56, -200.49 + magicNumber),
+                new Coord(483.47, -194.08 + magicNumber),
+                new Coord(494.61, -145.84 + magicNumber)
+        )));
+
         longBreakActivitiesLocations.put(longBreakActivities.Library, new ArrayList<>(Arrays.asList(
                 new Coord(251.28, -194.90 + magicNumber),
                 new Coord(251.32, -179.51 + magicNumber),

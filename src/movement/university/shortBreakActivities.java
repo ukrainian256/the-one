@@ -5,6 +5,5 @@ package movement.university;
  */
 enum shortBreakActivities {
     Smoke,
-    Coffee,
-    Toilet
+    SitInTheHall
 }
