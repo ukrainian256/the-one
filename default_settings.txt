@@ -3,11 +3,10 @@
 #
 
 ## Scenario settings
-Scenario.name = default_scenario
-Scenario.simulateConnections = true
-Scenario.updateInterval = 10
-# 43200s == 12h
+Scenario.name = UniScenario1
 Scenario.endTime = 45000
+Scenario.updateInterval = 10
+Scenario.simulateConnections = false
 
 ## Interface-specific settings:
 # type : which interface class the interface belongs to
@@ -62,7 +61,7 @@ Group.speed = 0.5, 1.5
 # Message TTL of 300 minutes (5 hours)
 Group.msgTtl = 300
 
-Group.nrofHosts = 800
+Group.nrofHosts = 700
 
 # group1 (pedestrians) specific settings
 Group1.groupID = p
@@ -76,26 +75,26 @@ Events.nrof = 0
 # seed for movement models' pseudo random number generator (default = 0)
 MovementModel.rngSeed = 1
 # World's size for Movement Models without implicit size (width, height; meters)
-MovementModel.worldSize = 4500, 3400
+MovementModel.worldSize = 1000, 1000
 # How long time to move hosts in the world before real simulation
 MovementModel.warmup = 1000
 
 ## Map based movement -movement model specific settings
 MapBasedMovement.nrofMapFiles = 1
-
 MapBasedMovement.mapFile1 = data/mi_building.wkt
 
 ## Reports - all report names have to be valid report classes
 
 # how many reports to load
-Report.nrofReports = 2
-# length of the warm up period (simulated seconds)
-Report.warmup = 0
-# default directory of reports (can be overridden per Report with output setting)
-Report.reportDir = reports/
-# Report classes to load
-Report.report1 = MessageStatsReport
-Report.report2 = ContactTimesReport
+Report.nrofReports = 1
+Report.report1 = NodeDensityReport
+Report.reportDir = reports
+
+NodeDensityReport.sampleInterval = 5
+NodeDensityReport.outputGnuplot = true
+NodeDensityReport.xCount = 50
+NodeDensityReport.yCount = 50
+NodeDensityReport.onlyAverage = true
 
 ## Default settings for some routers settings
 ProphetRouter.secondsInTimeUnit = 30

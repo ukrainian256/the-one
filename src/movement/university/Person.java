@@ -1,6 +1,5 @@
 package movement.university;
 
-import movement.RandomDirection;
 import java.util.*;
 
 /**
@@ -22,13 +21,13 @@ public class Person {
 
     }
 
-    public Person(PersonGenerator personGenerator) {
+    public Person(PersonAttributesGenerator personAttributesGenerator) {
 
         Random random = new Random();
         this.gender = random.nextDouble() > 0.3 ? Gender.Male : Gender.Female;
-        this.speed = personGenerator.generateSpeed();
-        this.organizedLevel = personGenerator.generateOrganizationLevel();
-        this.transportationType = personGenerator.generateTransportationType();
+        this.speed = personAttributesGenerator.generateSpeed();
+        this.organizedLevel = personAttributesGenerator.generateOrganizationLevel();
+        this.transportationType = personAttributesGenerator.generateTransportationType();
 
     }
 

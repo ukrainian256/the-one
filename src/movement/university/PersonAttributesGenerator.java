@@ -6,16 +6,16 @@ import java.util.*;
  * Created by afedotov on 11/28/16.
  */
 
-public class PersonGenerator {
+public class PersonAttributesGenerator {
 
     private final List<TransportationType> VALUES;
     private final int SIZE;
     private static final Random RANDOM = new Random();
 
 
-    public PersonGenerator() {
+    public PersonAttributesGenerator() {
 
-        VALUES = Collections.unmodifiableList(Arrays.asList(PersonGenerator.getTransportationTypes()));
+        VALUES = Collections.unmodifiableList(Arrays.asList(PersonAttributesGenerator.getTransportationTypes()));
         SIZE = VALUES.size();
 
     }

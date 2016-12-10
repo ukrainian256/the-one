@@ -98,7 +98,7 @@ public class ClassesGenerator {
 
         );
 
-        uniClasses = generateClassesWholeSchedule();
+        uniClasses = generateWholeSchedule();
 
     }
 
@@ -133,22 +133,28 @@ public class ClassesGenerator {
 
         }
 
+        conflictExists(generatedClasses);
+
         return generatedClasses;
     }
 
     private boolean conflictExists(List<UniversityClass> classes) {
 
         for (int i = 0; i < classes.size(); ++i) {
-            for (int j = i + 1; j < classes.size(); ++j) {
-                double startA = classes.get(i).getStartTime();
-                double endA = classes.get(i).getEndTime();
-                double startB = classes.get(j).getEndTime();
-                double endB = classes.get(j).getEndTime();
 
-                // no conflict iff startB > endA OR startA > endB
-                if (startB <= endA && startA <= endB) {
+            double endA = classes.get(i).getEndTime();
+
+            for (int j = i + 1; j < classes.size(); ++j) {
+
+                double startB = classes.get(j).getStartTime();
+
+                if(startB <= endA) {
                     return true;
                 }
+                // no conflict iff startB > endA OR startA > endB
+//                if (((startA <= endB) && (endA >=  startB)) || ((startB <= endA) && (endB >= startA))) {
+//                    return true;
+//                }
             }
         }
 
@@ -186,7 +192,7 @@ public class ClassesGenerator {
 
     }
 
-    private static List<UniversityClass> generateClassesWholeSchedule() {
+    private static List<UniversityClass> generateWholeSchedule() {
 
         List<UniversityClass> result = new ArrayList<>();
         boolean horsaalUsed = false;

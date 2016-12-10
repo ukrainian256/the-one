@@ -116,6 +116,9 @@ public class UniversityMovement extends ShortestPathMapBasedMovement {
         MapNode from = super.getMap().getNodeByCoord(initialLocation);
         MapNode to = super.getMap().getNodeByCoord(destinationLocation);
 
+        String name = this.host.toString();
+        System.out.println(name + ", From - " + from.getLocation() + ", To - " + to.getLocation());
+
         List<MapNode> nodePath = super.pathFinder.getShortestPath(from, to);
 
         // this assertion should never fire if the map is checked in read phase

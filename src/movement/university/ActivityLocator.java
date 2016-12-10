@@ -43,6 +43,27 @@ public class ActivityLocator {
                 new Coord(494.61, -145.84 + magicNumber)
         )));
 
+        shortBreakActivitiesLocations.put(shortBreakActivities.Coffee, new ArrayList<>(Arrays.asList(
+                new Coord(512.79, -117.44 + magicNumber),
+                new Coord(592.43, -97.99 + magicNumber)
+        )));
+
+        shortBreakActivitiesLocations.put(shortBreakActivities.Cafe, new ArrayList<>(Arrays.asList(
+                new Coord(369.32, -149.33 + magicNumber)
+        )));
+
+        shortBreakActivitiesLocations.put(shortBreakActivities.Toilet, new ArrayList<>(Arrays.asList(
+                new Coord(264.12, -269.73 + magicNumber),
+                new Coord(348.99, -257.53 + magicNumber),
+                new Coord(434.54, -243.74 + magicNumber),
+                new Coord(519.39, -228.56 + magicNumber),
+                new Coord(298.92, -142.91 + magicNumber),
+                new Coord(378.44, -126.99 + magicNumber),
+                new Coord(457.80, -115.53 + magicNumber),
+                new Coord(536.46, -95.79 + magicNumber),
+                new Coord(613.95, -73.65 + magicNumber)
+        )));
+
         longBreakActivitiesLocations.put(longBreakActivities.Library, new ArrayList<>(Arrays.asList(
                 new Coord(251.28, -194.90 + magicNumber),
                 new Coord(251.32, -179.51 + magicNumber),

@@ -16,6 +16,7 @@ public class Student {
     private Random RANDOM = new Random();
     private Class longBreakActivitiesClass = longBreakActivities.class;
     private Class shortBreakActivitiesClass = shortBreakActivities.class;
+    private ActivityLocator activityLocator;
 
 
     public List<ScheduledEvent> getGeneratedEvents() {
@@ -24,7 +25,7 @@ public class Student {
 
     public Student() {
 
-        this.person = new Person(new PersonGenerator());
+        this.person = new Person(new PersonAttributesGenerator());
         this.classesGenerator = new ClassesGenerator();
 
         double magicNumber = 432.75;
@@ -58,7 +59,7 @@ public class Student {
             // check for possibility to do long break activities
             while (canDoLongActivity(timeUntilNextClass)) {
 
-                double duration = RANDOM.nextDouble() * timeUntilNextClass + 200;
+                double duration = RANDOM.nextDouble() * timeUntilNextClass + 1200;
                 ScheduledEvent eventToPush = generateLongBreakEvent(currentTime, duration);
                 resultingEvents.add(eventToPush);
                 currentTime += duration;
@@ -69,7 +70,7 @@ public class Student {
             // check for possibility to do short break activities
             while (canDoShortActivity(timeUntilNextClass)) {
 
-                double duration = RANDOM.nextDouble() * (timeUntilNextClass - 1000) + 1200;
+                double duration = RANDOM.nextDouble() * 300 + 200;
                 ScheduledEvent eventToPush = generateShortBreakEvent(currentTime, duration);
                 resultingEvents.add(eventToPush);
                 currentTime += duration;
@@ -126,14 +127,14 @@ public class Student {
     private Activity generateShortBreakActivity(double duration) {
 
         shortBreakActivities activityValue = (shortBreakActivities) (shortBreakActivitiesClass.getEnumConstants()[RANDOM.nextInt(shortBreakActivitiesClass.getEnumConstants().length)]);
-        return new Activity(duration, ActivityLocator.getShortActivityLocation(activityValue));
+        return new Activity(duration, activityLocator.getShortActivityLocation(activityValue));
 
     }
 
     private Activity generateLongBreakActivity(double duration) {
 
         longBreakActivities activityValue = (longBreakActivities) (longBreakActivitiesClass.getEnumConstants()[RANDOM.nextInt(longBreakActivitiesClass.getEnumConstants().length)]);
-        return new Activity(duration, ActivityLocator.getLongActivityLocation(activityValue));
+        return new Activity(duration, activityLocator.getLongActivityLocation(activityValue));
 
     }
 
